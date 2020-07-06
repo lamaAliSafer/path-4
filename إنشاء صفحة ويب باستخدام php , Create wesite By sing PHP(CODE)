@@ -1,0 +1,115 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database ="control_robot";
+$conn = new mysqli($servername, $username, $password,$database);
+// Check connection
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+
+echo "Connected successfully";
+?>
+
+<html lang="en" dir="ltr">
+<head>
+<style>
+body {
+  background-color: hsla(89, 43%, 51%, 0.3);
+}
+
+.button {
+  background-color: #ff6347; /* read */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  align-items: center;
+}
+
+.button22 {
+  background-color: #3cb371; /* grean */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: left;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 4s; /* Safari */
+  transition-duration:4s;
+  align-items: left;
+}
+
+
+
+</style>
+</head>
+<body>
+
+<form action="ui.php" method="post">
+
+  <label>Forword:</label></br><input type="text" id="forwards" name="forwards"><input style="margin-right:20px;margin-left:20px;"type="submit" value =" DELETE " name="delete"><br><br>
+  <label>Left:</label></br><input type="text" id="left" name="left"><input style="margin-right:20px;margin-left:20px;"type="submit" value =" SAVE " name="save"><br><br>
+  <label>Right:</label></br><input type="text" id="right" name="right"><input style="margin-right:20px;margin-left:20px;"type="submit" value =" START " name="rightt"><br><br>
+
+</form>
+
+
+
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "control_robot";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Check connection
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql = "INSERT INTO lamarobot(forword,leftv,rightv)
+VALUES ('$_POST[forwards]','$_POST[left]','$_POST[right]')";
+
+$result=mysqli_query($conn, $sql);
+
+
+
+if(isset($_POST['rightt'])){
+	$forword =$_POST['forwards'];
+	$leftv =$_POST['left'];
+	$rightv =$_POST['right'];
+
+  for($x=1;$x<=$forword;$x++){
+		echo "&uarr;</br>";
+	}
+  
+	echo"</br>";
+	
+	
+	for($x=1;$x<=$leftv;$x++){
+		echo "&larr;";
+	}
+	for($x=1;$x<=$rightv;$X++){
+		echo "&rarr;";
+	}
+	
+}
+$conn->close();
+?>
+	
+</body>
+
+</html>
